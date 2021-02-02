@@ -1,0 +1,20 @@
+{
+  "1775b9a3729": {
+    "path": "Testing.ts",
+    "class": "Testing",
+    "parentPath": ""
+  },
+  "global": {
+    "globalAutoLayerMarkEnable": true
+  },
+  "1775ce84122": {
+    "path": "..\\resource\\gameSkin\\ball.ts",
+    "class": "ball",
+    "parentPath": ""
+  },
+  "1775cf386e1": {
+    "path": "..\\resource\\gameSkin\\testing.ts",
+    "class": "testing",
+    "parentPath": ""
+  }
+}
