@@ -163,6 +163,10 @@ var Main = (function (_super) {
             }, _this);
         });
     };
+    /**
+     * 创建场景界面
+     * Create scene interface
+     */
     Main.prototype.createGameScene = function () {
         var ballStage = new Ball();
         this.addChild(ballStage);

@@ -94,13 +94,11 @@ class Main extends eui.UILayer {
 
         })
     }
-
-    private textfield: egret.TextField;
+    
     /**
      * 创建场景界面
      * Create scene interface
      */
-    ball: egret.Bitmap;
     protected createGameScene(): void {
 
         let ballStage: Ball = new Ball();

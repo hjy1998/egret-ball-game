@@ -12,7 +12,6 @@ var Ball = (function (_super) {
     __extends(Ball, _super);
     function Ball() {
         var _this = _super.call(this) || this;
-        _this.i = 1;
         _this.skinName = "resource/gameSkin/ball.exml";
         return _this;
     }
@@ -21,59 +20,88 @@ var Ball = (function (_super) {
     };
     Ball.prototype.childrenCreated = function () {
         _super.prototype.childrenCreated.call(this);
-        this.btn_start.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onButtonClick, this);
+        this.btn_start.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onStartGame, this);
+        this.btn_pause.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onPauseGame, this);
+        this.btn_resume.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onResumeGame, this);
+        this.btn_reset.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onResetGame, this);
     };
-    Ball.prototype.onButtonClick = function (e) {
-        switch (this.i) {
-            case 1:
-                this.ballTween();
-                this.i++;
-                this.btn_start.currentState = "pause";
-                break;
-            case 2:
-                this.tw.setPaused(true);
-                this.i++;
-                this.btn_start.currentState = "resume";
-                break;
-            case 3:
-                this.tw.setPaused(false);
-                this.i = 2;
-                this.btn_start.currentState = "pause";
-                break;
-            case 4:
-                this.win_Top.visible = false;
-                this.win_Bottom.visible = false;
-                this.img_ball.x = 242;
-                this.img_ball.y = 485;
-                this.i = 1;
-                this.btn_start.currentState = "up";
-                break;
-        }
+    Ball.prototype.onStartGame = function (e) {
+        this.btn_start.visible = false;
+        this.btn_pause.visible = true;
+        this.btn_resume.visible = false;
+        this.btn_reset.visible = false;
+        this.ballTween();
+    };
+    Ball.prototype.onPauseGame = function (e) {
+        this.btn_start.visible = false;
+        this.btn_pause.visible = false;
+        this.btn_resume.visible = true;
+        this.btn_reset.visible = false;
+        this.tw.setPaused(true);
+    };
+    Ball.prototype.onResumeGame = function (e) {
+        this.btn_start.visible = false;
+        this.btn_pause.visible = true;
+        this.btn_resume.visible = false;
+        this.btn_reset.visible = false;
+        this.tw.setPaused(false);
+    };
+    Ball.prototype.onResetGame = function (e) {
+        this.btn_start.visible = true;
+        this.btn_pause.visible = false;
+        this.btn_resume.visible = false;
+        this.btn_reset.visible = false;
+        this.win_Top.visible = false;
+        this.win_Bottom.visible = false;
+        this.img_ball.x = 242;
+        this.img_ball.y = 485;
     };
     Ball.prototype.ballTween = function () {
         var _this = this;
-        this.random = Math.random();
-        if (this.random < 0.5) {
-            this.tw = egret.Tween.get(this.img_ball);
-            this.tw.to({ y: 900 }, 250).to({ y: 100 }, 500).to({ y: 900 }, 500)
-                .to({ y: 100 }, 500).to({ y: 900 }, 500).to({ y: 100 }, 500);
-            this.tw.call(function () {
-                _this.win_Bottom.visible = true;
-                _this.btn_start.currentState = "reset";
-                _this.i = 4;
-            });
-        }
-        else if (this.random > 0.5) {
-            this.tw = egret.Tween.get(this.img_ball);
-            this.tw.to({ y: 900 }, 250).to({ y: 100 }, 500).to({ y: 900 }, 500)
-                .to({ y: 100 }, 500).to({ y: 900 }, 500);
-            this.tw.call(function () {
-                _this.win_Top.visible = true;
-                _this.btn_start.currentState = "reset";
-                _this.i = 4;
-            });
-        }
-        ;
+        this.tw = egret.Tween.get(this.img_ball);
+        var bounceTimes = Math.floor(Math.random() * 4) + 5;
+        var i = 1;
+        var bounce = function () {
+            _this.tw = egret.Tween.get(_this.img_ball);
+            console.log(i === bounceTimes);
+            if ((_this.img_ball.y === 100 || _this.img_ball.y === 900) && i === bounceTimes) {
+                if (_this.img_ball.y === 100) {
+                    _this.win_Top.visible = false;
+                    _this.win_Bottom.visible = true;
+                    _this.btn_start.visible = false;
+                    _this.btn_pause.visible = false;
+                    _this.btn_resume.visible = false;
+                    _this.btn_reset.visible = true;
+                    _this.tw.setPaused(true);
+                }
+                else if (_this.img_ball.y === 900) {
+                    _this.win_Top.visible = true;
+                    _this.win_Bottom.visible = false;
+                    _this.btn_start.visible = false;
+                    _this.btn_pause.visible = false;
+                    _this.btn_resume.visible = false;
+                    _this.btn_reset.visible = true;
+                    _this.tw.setPaused(true);
+                }
+                ;
+            }
+            if (_this.img_ball.y === 100 || _this.img_ball.y === 900) {
+                console.log(i, bounceTimes);
+                if (i <= bounceTimes) {
+                    if (_this.img_ball.y === 900) {
+                        _this.tw.to({ y: 100 }, 500);
+                    }
+                    else if (_this.img_ball.y === 100) {
+                        _this.tw.to({ y: 900 }, 500);
+                    }
+                    ;
+                }
+                i++;
+            }
+            _this.tw.call(bounce, _this);
+        };
+        this.tw.to({ y: 900 }, 250);
+        bounce();
     };
     ;
     return Ball;

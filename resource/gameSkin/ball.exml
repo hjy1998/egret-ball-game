@@ -4,18 +4,24 @@
 	<e:Image id="bg_img" source="bgImg_png" x="0" y="0" width="640" height="1136" />
 	<e:Image id="flag_a" source="aImg_png" x="70" y="141" anchorOffsetX="0" width="500" anchorOffsetY="0" height="300" />
 	<e:Image id="flag_b" source="bImg_png" x="70" y="680" width="500" height="300" />
-	<e:Image id="img_ball" source="ballImg_png" x="242" y="485" width="150" height="150" />
-	<e:Button id="btn_start" label="" anchorOffsetX="113" width="220" anchorOffsetY="92" height="180" right="0"
-	          verticalCenter="0" enabled="true">
-		<e:skinName>
-			<e:Skin states="up,down,disabled,pause,resume,reset">
-				<e:Image width="90%" height="90%" width.down="100%" height.down="100%" source="btnImg_png" source.down="btnImg_png"
-				         source.disabled="btnImg_png" source.pause="button_png" source.resume="button_png" source.reset="button_png"
-				         horizontalCenter="0" verticalCenter=" 0" />
-				<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0" />
-			</e:Skin>
-		</e:skinName>
-	</e:Button>
-	<e:Image id="win_Top" source="win_png" x="70" y="165" width="500" height="250"  visible="false"/>
-	<e:Image id="win_Bottom" source="win_png" x="70" y="705" width="500" height="250"  visible="false"/>
+	<e:Image id="img_ball" source="ballImg_png" x="243" y="485" width="150" height="150" />
+	<e:Image id="btn_start" anchorOffsetX="113" width="220" anchorOffsetY="92" height="180" verticalCenter="0" x="533" source="btnImg_png"/>
+	<e:Image id="win_Top" source="win_png" x="70" y="165" width="500" height="250" visible="false" />
+	<e:Image id="win_Bottom" source="win_png" x="70" y="705" width="500" height="250" visible="false" />
+	<e:Group id="btn_pause" x="533" y="570" anchorOffsetX="113" width="220" anchorOffsetY="92" height="180" visible="false">
+		<e:Image source="button_png" anchorOffsetX="113" width="195" anchorOffsetY="92" height="165" x="125.5" y="98.66" />
+		<e:Label text="暂停" x="198.29" y="160" bold="true" textColor="0x000000" anchorOffsetX="120.29" width="66"
+		         anchorOffsetY="106.84" height="36" scaleX="1" scaleY="1" fontFamily="KaiTi" size="28" />
+	</e:Group>
+	<e:Group id="btn_resume" x="533" y="570" anchorOffsetX="113" width="220" anchorOffsetY="92" height="180"
+	         visible="false">
+		<e:Image source="button_png" anchorOffsetX="113" width="195" anchorOffsetY="92" height="165" x="125.5" y="99.5" />
+		<e:Label text="继续" x="199.29" y="161.26" bold="true" textColor="0x000000" anchorOffsetX="120.29" width="66"
+		         anchorOffsetY="106.84" height="36" scaleX="1" scaleY="1" fontFamily="KaiTi" size="28" />
+	</e:Group>
+	<e:Group id="btn_reset" x="533" y="570" anchorOffsetX="113" width="220" anchorOffsetY="92" height="180" visible="false">
+		<e:Image source="button_png" anchorOffsetX="113" width="195" anchorOffsetY="92" height="165" x="125.5" y="99.5" />
+		<e:Label text="重新" x="199.29" y="161.26" bold="true" textColor="0x000000" anchorOffsetX="120.29" width="66"
+		         anchorOffsetY="106.84" height="36" scaleX="1" scaleY="1" fontFamily="KaiTi" size="28" />
+	</e:Group>
 </e:Skin>
